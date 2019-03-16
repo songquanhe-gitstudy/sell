@@ -7,7 +7,7 @@ import java.util.List;
 public interface IProductInfoDao {
     int deleteByPrimaryKey(String productId);
 
-    void insert(ProductInfo record);
+    ProductInfo insert(ProductInfo record);
 
     int insertSelective(ProductInfo record);
 
@@ -18,5 +18,7 @@ public interface IProductInfoDao {
     int updateByPrimaryKey(ProductInfo record);
 
     List<ProductInfo> findByProductStatus(Integer status);
+
+    List<ProductInfo> findAll();
 
 }

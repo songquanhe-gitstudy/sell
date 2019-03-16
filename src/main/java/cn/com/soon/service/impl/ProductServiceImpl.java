@@ -7,9 +7,8 @@ import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.ProductService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +36,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductInfo> findAll(Pageable pageable) {
-        return productInfoDao.findAll(pageable);
+    public List<ProductInfo> findAll(Integer page, Integer size) {
+        page = page == null ? 1 : page;
+        size = size == null ? 10 : size;
+        PageHelper.startPage(page, size);
+        return productInfoDao.findAll();
     }
 
     @Override
@@ -109,6 +111,6 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
-        productInfoDao.insert(productInfo);
+        return productInfoDao.insert(productInfo);
     }
 }

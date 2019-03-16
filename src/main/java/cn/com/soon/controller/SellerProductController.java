@@ -9,8 +9,6 @@ import cn.com.soon.service.ProductService;
 import cn.com.soon.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -48,8 +46,9 @@ public class SellerProductController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10") Integer size,
                              Map<String, Object> map) {
-        PageRequest request = new PageRequest(page - 1, size);
-        Page<ProductInfo> productInfoPage = productService.findAll(request);
+//        PageRequest request = new PageRequest(page - 1, size);
+
+        List<ProductInfo> productInfoPage = productService.findAll(page, size);
         map.put("productInfoPage", productInfoPage);
         map.put("currentPage", page);
         map.put("size", size);

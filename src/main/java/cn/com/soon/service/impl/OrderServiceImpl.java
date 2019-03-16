@@ -14,12 +14,10 @@ import cn.com.soon.model.OrderMaster;
 import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.*;
 import cn.com.soon.utils.KeyUtil;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -127,12 +125,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+    public List<OrderDTO> findList(String buyerOpenid) {
+        List<OrderMaster> orderMasterPage = orderMasterDao.findAllByBuyerOpenid(buyerOpenid);
 
-        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage);
 
-        return new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+        return orderDTOList;
     }
 
     @Override
@@ -227,12 +225,17 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+
     @Override
-    public Page<OrderDTO> findList(Pageable pageable) {
-        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+    public List<OrderDTO> findList(Integer page, Integer size) {
+        page = page == null ? 1 : page;
+        size = size == null ? 10 : size;
+        PageHelper.startPage(page, size);
 
-        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        List<OrderMaster> orderMasterPage = orderMasterDao.findAll();
 
-        return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage);
+
+        return orderDTOList;
     }
 }

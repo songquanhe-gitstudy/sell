@@ -1,18 +1,16 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.service.BuyerService;
-import cn.com.soon.service.OrderService;
 import cn.com.soon.VO.ResultVO;
 import cn.com.soon.converter.OrderForm2OrderDTOConverter;
 import cn.com.soon.dto.OrderDTO;
 import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.form.OrderForm;
+import cn.com.soon.service.BuyerService;
+import cn.com.soon.service.OrderService;
 import cn.com.soon.utils.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -70,10 +68,11 @@ public class BuyerOrderController {
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
 
-        PageRequest request = new PageRequest(page, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(openid, request);
+//        PageRequest request = new PageRequest(page, size);
 
-        return ResultVOUtil.success(orderDTOPage.getContent());
+        List<OrderDTO> orderDTOPage = orderService.findList(openid);
+
+        return ResultVOUtil.success(orderDTOPage);
     }
 
 
