@@ -1,6 +1,7 @@
 package cn.com.soon.repository;
 
-import cn.com.soon.VO.ProductInfo;
+import cn.com.soon.dao.IProductInfoDao;
+import cn.com.soon.model.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,15 +13,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-05-09 11:42
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductInfoRepositoryTest {
+public class ProductInfoDaoTest {
 
     @Autowired
-    private ProductInfoRepository repository;
+    private IProductInfoDao productInfoDao;
 
     @Test
     public void saveTest() {
@@ -34,14 +33,13 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductStatus(0);
         productInfo.setCategoryType(2);
 
-        ProductInfo result = repository.save(productInfo);
-        Assert.assertNotNull(result);
+        productInfoDao.insert(productInfo);
+//        Assert.assertNotNull(result);
     }
 
     @Test
     public void findByProductStatus() throws Exception {
-
-        List<ProductInfo> productInfoList = repository.findByProductStatus(0);
+        List<ProductInfo> productInfoList = productInfoDao.findByProductStatus(0);
         Assert.assertNotEquals(0, productInfoList.size());
     }
 

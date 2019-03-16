@@ -2,10 +2,12 @@ package cn.com.soon.dao;
 
 import cn.com.soon.model.ProductCategory;
 
-public interface IProductCategory {
+import java.util.List;
+
+public interface IProductCategoryDao {
     int deleteByPrimaryKey(Integer categoryId);
 
-    int insert(ProductCategory record);
+    void insert(ProductCategory record);
 
     int insertSelective(ProductCategory record);
 
@@ -14,4 +16,9 @@ public interface IProductCategory {
     int updateByPrimaryKeySelective(ProductCategory record);
 
     int updateByPrimaryKey(ProductCategory record);
+
+    List<ProductCategory> findAll();
+
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
+
 }

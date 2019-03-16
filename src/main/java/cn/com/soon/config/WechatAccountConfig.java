@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * Created by 廖师兄
- * 2017-07-03 01:31
  */
 @Data
 @Component

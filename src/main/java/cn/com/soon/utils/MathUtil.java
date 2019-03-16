@@ -1,8 +1,6 @@
 package cn.com.soon.utils;
 
 /**
- * Created by 廖师兄
- * 2017-07-09 16:56
  */
 public class MathUtil {
 

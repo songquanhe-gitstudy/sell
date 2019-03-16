@@ -1,6 +1,7 @@
 package cn.com.soon.repository;
 
-import cn.com.soon.VO.OrderDetail;
+import cn.com.soon.dao.IOrderDetailDao;
+import cn.com.soon.model.OrderDetail;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,15 +13,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 23:29
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OrderDetailRepositoryTest {
+public class OrderDetailDaoTest {
 
     @Autowired
-    private OrderDetailRepository repository;
+    private IOrderDetailDao orderDetailDao;
+
 
     @Test
     public void saveTest() {
@@ -33,13 +33,15 @@ public class OrderDetailRepositoryTest {
         orderDetail.setProductPrice(new BigDecimal(2.2));
         orderDetail.setProductQuantity(3);
 
-        OrderDetail result = repository.save(orderDetail);
-        Assert.assertNotNull(result);
+        int insert = orderDetailDao.insert(orderDetail);
+
+        Assert.assertNotNull(insert);
     }
 
     @Test
     public void findByOrderId() throws Exception {
-        List<OrderDetail> orderDetailList = repository.findByOrderId("11111111");
+        List<OrderDetail> orderDetailList = orderDetailDao.findByOrderId("11111111");
+
         Assert.assertNotEquals(0, orderDetailList.size());
     }
 

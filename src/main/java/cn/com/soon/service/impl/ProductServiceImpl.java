@@ -1,12 +1,12 @@
 package cn.com.soon.service.impl;
 
-import cn.com.soon.VO.ProductInfo;
-import cn.com.soon.repository.ProductInfoRepository;
-import cn.com.soon.service.ProductService;
+import cn.com.soon.dao.IProductInfoDao;
 import cn.com.soon.dto.CartDTO;
 import cn.com.soon.enums.ProductStatusEnum;
 import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
+import cn.com.soon.model.ProductInfo;
+import cn.com.soon.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-05-09 17:31
  */
 
 @Component
@@ -26,40 +24,40 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductInfoRepository repository;
+    private IProductInfoDao productInfoDao;
 
     @Override
     public ProductInfo findOne(String productId) {
-        return repository.findOne(productId);
+        return productInfoDao.selectByPrimaryKey(productId);
     }
 
     @Override
     public List<ProductInfo> findUpAll() {
-        return repository.findByProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfoDao.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
 
     @Override
     public Page<ProductInfo> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return productInfoDao.findAll(pageable);
     }
 
     @Override
-    public ProductInfo save(ProductInfo productInfo) {
-        return repository.save(productInfo);
+    public void save(ProductInfo productInfo) {
+        productInfoDao.insert(productInfo);
     }
 
     @Override
     @Transactional
     public void increaseStock(List<CartDTO> cartDTOList) {
-        for (CartDTO cartDTO: cartDTOList) {
-            ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo = productInfoDao.selectByPrimaryKey(cartDTO.getProductId());
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
             productInfo.setProductStock(result);
 
-            repository.save(productInfo);
+            productInfoDao.insert(productInfo);
         }
 
     }
@@ -67,8 +65,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
-        for (CartDTO cartDTO: cartDTOList) {
-            ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo = productInfoDao.selectByPrimaryKey(cartDTO.getProductId());
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
@@ -80,13 +78,13 @@ public class ProductServiceImpl implements ProductService {
 
             productInfo.setProductStock(result);
 
-            repository.save(productInfo);
+            productInfoDao.insert(productInfo);
         }
     }
 
     @Override
-    public ProductInfo onSale(String productId) {
-        ProductInfo productInfo = repository.findOne(productId);
+    public void onSale(String productId) {
+        ProductInfo productInfo = productInfoDao.selectByPrimaryKey(productId);
         if (productInfo == null) {
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
         }
@@ -96,12 +94,12 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
-        return repository.save(productInfo);
+        productInfoDao.insert(productInfo);
     }
 
     @Override
     public ProductInfo offSale(String productId) {
-        ProductInfo productInfo = repository.findOne(productId);
+        ProductInfo productInfo = productInfoDao.selectByPrimaryKey(productId);
         if (productInfo == null) {
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
         }
@@ -111,6 +109,6 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
-        return repository.save(productInfo);
+        productInfoDao.insert(productInfo);
     }
 }

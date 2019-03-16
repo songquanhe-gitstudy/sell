@@ -2,7 +2,7 @@ package cn.com.soon.dao;
 
 import cn.com.soon.model.OrderMaster;
 
-public interface IOrderMaster {
+public interface IOrderMasterDao {
     int deleteByPrimaryKey(String orderId);
 
     int insert(OrderMaster record);

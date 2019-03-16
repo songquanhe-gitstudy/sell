@@ -1,9 +1,9 @@
 package cn.com.soon.service.impl;
 
-import cn.com.soon.VO.OrderDetail;
 import cn.com.soon.dto.OrderDTO;
 import cn.com.soon.enums.OrderStatusEnum;
 import cn.com.soon.enums.PayStatusEnum;
+import cn.com.soon.model.OrderDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 19:54
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

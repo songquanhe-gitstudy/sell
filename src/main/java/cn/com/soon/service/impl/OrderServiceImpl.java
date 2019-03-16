@@ -1,19 +1,18 @@
 package cn.com.soon.service.impl;
 
-import cn.com.soon.VO.OrderDetail;
-import cn.com.soon.VO.OrderMaster;
-import cn.com.soon.VO.ProductInfo;
-import cn.com.soon.repository.OrderDetailRepository;
-import cn.com.soon.repository.OrderMasterRepository;
-import cn.com.soon.service.*;
 import cn.com.soon.converter.OrderMaster2OrderDTOConverter;
+import cn.com.soon.dao.IOrderDetailDao;
+import cn.com.soon.dao.IOrderMasterDao;
 import cn.com.soon.dto.CartDTO;
 import cn.com.soon.dto.OrderDTO;
 import cn.com.soon.enums.OrderStatusEnum;
 import cn.com.soon.enums.PayStatusEnum;
 import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
-import com.imooc.service.*;
+import cn.com.soon.model.OrderDetail;
+import cn.com.soon.model.OrderMaster;
+import cn.com.soon.model.ProductInfo;
+import cn.com.soon.service.*;
 import cn.com.soon.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -31,8 +30,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 18:43
  */
 @Service
 @Slf4j
@@ -42,10 +39,10 @@ public class OrderServiceImpl implements OrderService {
     private ProductService productService;
 
     @Autowired
-    private OrderDetailRepository orderDetailRepository;
+    private IOrderDetailDao orderDetailDao;
 
     @Autowired
-    private OrderMasterRepository orderMasterRepository;
+    private IOrderMasterDao orderMasterDao;
 
     @Autowired
     private PayService payService;
@@ -81,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setDetailId(KeyUtil.genUniqueKey());
             orderDetail.setOrderId(orderId);
             BeanUtils.copyProperties(productInfo, orderDetail);
-            orderDetailRepository.save(orderDetail);
+            orderDetailDao.insert(orderDetail);
 
 //            CartDTO cartDTO = new CartDTO(orderDetail.getProductId(), orderDetail.getProductQuantity());
 //            cartDTOList.add(cartDTO);
@@ -95,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
         orderMaster.setOrderAmount(orderAmount);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
-        orderMasterRepository.save(orderMaster);
+        orderMasterDao.insert(orderMaster);
 
         //4. 扣库存
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
@@ -112,12 +109,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO findOne(String orderId) {
 
-        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        OrderMaster orderMaster = orderMasterDao.selectByPrimaryKey(orderId);
         if (orderMaster == null) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
 
-        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
+        List<OrderDetail> orderDetailList = orderDetailDao.findAllByOrderId(orderId);
         if (CollectionUtils.isEmpty(orderDetailList)) {
             throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
         }
@@ -152,8 +149,9 @@ public class OrderServiceImpl implements OrderService {
         //修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
-        if (updateResult == null) {
+        int updateResult = orderMasterDao.insert(orderMaster);
+//        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
+        if (updateResult != 0) {
             log.error("【取消订单】更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
@@ -189,8 +187,8 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
-        if (updateResult == null) {
+        int updateResult = orderMasterDao.insert(orderMaster);
+        if (updateResult != 0) {
             log.error("【完结订单】更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
@@ -220,8 +218,8 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setPayStatus(PayStatusEnum.SUCCESS.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
-        if (updateResult == null) {
+        int updateResult = orderMasterDao.insert(orderMaster);
+        if (updateResult != 0) {
             log.error("【订单支付完成】更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }

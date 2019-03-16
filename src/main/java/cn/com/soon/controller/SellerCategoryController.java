@@ -1,8 +1,8 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.VO.ProductCategory;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.form.CategoryForm;
+import cn.com.soon.model.ProductCategory;
 import cn.com.soon.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ import java.util.Map;
 
 /**
  * 卖家类目
- * Created by 廖师兄
- * 2017-07-23 21:06
  */
 @Controller
 @RequestMapping("/seller/category")

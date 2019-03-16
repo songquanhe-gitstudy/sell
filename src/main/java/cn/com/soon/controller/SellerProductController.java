@@ -1,9 +1,9 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.VO.ProductInfo;
-import cn.com.soon.VO.ProductCategory;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.form.ProductForm;
+import cn.com.soon.model.ProductCategory;
+import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.CategoryService;
 import cn.com.soon.service.ProductService;
 import cn.com.soon.utils.KeyUtil;
@@ -26,8 +26,6 @@ import java.util.Map;
 
 /**
  * 卖家端商品
- * Created by 廖师兄
- * 2017-07-23 15:12
  */
 @Controller
 @RequestMapping("/seller/product")

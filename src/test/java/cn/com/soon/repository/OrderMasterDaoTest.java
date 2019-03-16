@@ -1,6 +1,8 @@
 package cn.com.soon.repository;
 
-import cn.com.soon.VO.OrderMaster;
+import cn.com.soon.dao.IOrderDetailDao;
+import cn.com.soon.dao.IOrderMasterDao;
+import cn.com.soon.model.OrderMaster;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,15 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 17:31
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OrderMasterRepositoryTest {
+public class OrderMasterDaoTest {
 
     @Autowired
-    private OrderMasterRepository repository;
+    private IOrderMasterDao orderMasterDao;
 
     private final String OPENID = "110110";
 
@@ -35,8 +35,8 @@ public class OrderMasterRepositoryTest {
         orderMaster.setBuyerOpenid(OPENID);
         orderMaster.setOrderAmount(new BigDecimal(2.5));
 
-        OrderMaster result = repository.save(orderMaster);
-        Assert.assertNotNull(result);
+        int insert = orderMasterDao.insert(orderMaster);
+        Assert.assertNotNull(insert);
     }
 
     @Test

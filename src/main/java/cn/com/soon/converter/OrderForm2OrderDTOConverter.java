@@ -1,7 +1,7 @@
 package cn.com.soon.converter;
 
-import cn.com.soon.VO.OrderDetail;
 import cn.com.soon.exception.SellException;
+import cn.com.soon.model.OrderDetail;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import cn.com.soon.dto.OrderDTO;
@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-06-18 23:41
  */
 @Slf4j
 public class OrderForm2OrderDTOConverter {

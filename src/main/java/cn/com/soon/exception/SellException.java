@@ -3,8 +3,6 @@ package cn.com.soon.exception;
 import cn.com.soon.enums.ResultEnum;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 18:55
  */
 public class SellException extends RuntimeException{
 

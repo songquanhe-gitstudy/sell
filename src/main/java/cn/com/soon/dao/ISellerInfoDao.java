@@ -2,7 +2,7 @@ package cn.com.soon.dao;
 
 import cn.com.soon.model.SellerInfo;
 
-public interface ISellerInfo {
+public interface ISellerInfoDao {
     int deleteByPrimaryKey(String sellerId);
 
     int insert(SellerInfo record);
@@ -14,4 +14,7 @@ public interface ISellerInfo {
     int updateByPrimaryKeySelective(SellerInfo record);
 
     int updateByPrimaryKey(SellerInfo record);
+
+
+    SellerInfo findSellerInfoByOpenid(String opendId);
 }

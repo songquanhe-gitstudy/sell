@@ -1,7 +1,7 @@
 package cn.com.soon.service;
 
-import cn.com.soon.VO.ProductInfo;
 import cn.com.soon.dto.CartDTO;
+import cn.com.soon.model.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,8 +9,6 @@ import java.util.List;
 
 /**
  * 商品
- * Created by 廖师兄
- * 2017-05-09 17:27
  */
 public interface ProductService {
 
@@ -24,7 +22,7 @@ public interface ProductService {
 
     Page<ProductInfo> findAll(Pageable pageable);
 
-    ProductInfo save(ProductInfo productInfo);
+    void save(ProductInfo productInfo);
 
     //加库存
     void increaseStock(List<CartDTO> cartDTOList);
@@ -33,7 +31,7 @@ public interface ProductService {
     void decreaseStock(List<CartDTO> cartDTOList);
 
     //上架
-    ProductInfo onSale(String productId);
+    void onSale(String productId);
 
     //下架
     ProductInfo offSale(String productId);
