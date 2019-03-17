@@ -6,6 +6,7 @@ import cn.com.soon.exception.SellException;
 import cn.com.soon.service.OrderService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,10 +37,12 @@ public class SellerOrderController {
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                             @RequestParam(value = "size", defaultValue = "5") Integer size,
                              Map<String, Object> map) {
-        List<OrderDTO> orderDTOPage = orderService.findList(page, size);
-        map.put("orderDTOPage", orderDTOPage);
+        PageInfo<OrderDTO> OrderDTOPageInfo = orderService.findList(page, size);
+        map.put("orderDTOPage", OrderDTOPageInfo.getList());
+        map.put("pageNavigate", OrderDTOPageInfo.getNavigatepageNums());
+        map.put("pages", OrderDTOPageInfo.getPages());
         map.put("currentPage", page);
         map.put("size", size);
         return new ModelAndView("order/list", map);

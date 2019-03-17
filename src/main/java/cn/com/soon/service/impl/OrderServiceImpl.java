@@ -14,7 +14,9 @@ import cn.com.soon.model.OrderMaster;
 import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.*;
 import cn.com.soon.utils.KeyUtil;
+import cn.com.soon.utils.PagerCopyUtil;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -227,15 +229,17 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public List<OrderDTO> findList(Integer page, Integer size) {
+    public PageInfo<OrderDTO> findList(Integer page, Integer size) {
         page = page == null ? 1 : page;
-        size = size == null ? 10 : size;
+        size = size == null ? 5 : size;
         PageHelper.startPage(page, size);
 
         List<OrderMaster> orderMasterPage = orderMasterDao.findAll();
+        PageInfo<OrderMaster> pageOmInfo = new PageInfo<>(orderMasterPage);
 
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage);
-
-        return orderDTOList;
+        PageInfo<OrderDTO> pageOdInfo = new PageInfo<>(orderDTOList);
+        PagerCopyUtil.setPageInfo(pageOmInfo, pageOdInfo);
+        return pageOdInfo;
     }
 }
