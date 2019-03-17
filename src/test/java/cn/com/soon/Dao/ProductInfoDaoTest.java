@@ -1,4 +1,4 @@
-package cn.com.soon.repository;
+package cn.com.soon.Dao;
 
 import cn.com.soon.dao.IProductInfoDao;
 import cn.com.soon.model.ProductInfo;
@@ -24,14 +24,14 @@ public class ProductInfoDaoTest {
     @Test
     public void saveTest() {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId("123456");
-        productInfo.setProductName("皮蛋粥");
-        productInfo.setProductPrice(new BigDecimal(3.2));
-        productInfo.setProductStock(100);
-        productInfo.setProductDescription("很好喝的粥");
+        productInfo.setProductId("123458");
+        productInfo.setProductName("皮蛋粥8");
+        productInfo.setProductPrice(new BigDecimal(8.2));
+        productInfo.setProductStock(800);
+        productInfo.setProductDescription("很好喝的粥3");
         productInfo.setProductIcon("http://xxxxx.jpg");
-        productInfo.setProductStatus(0);
-        productInfo.setCategoryType(2);
+        productInfo.setProductStatus(1);
+        productInfo.setCategoryType(1);
 
         productInfoDao.insert(productInfo);
 //        Assert.assertNotNull(result);
@@ -40,6 +40,7 @@ public class ProductInfoDaoTest {
     @Test
     public void findByProductStatus() throws Exception {
         List<ProductInfo> productInfoList = productInfoDao.findByProductStatus(0);
+        System.out.println("list：" + productInfoList.size());
         Assert.assertNotEquals(0, productInfoList.size());
     }
 

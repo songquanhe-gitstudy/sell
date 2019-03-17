@@ -4,10 +4,10 @@ import cn.com.soon.model.ProductCategory;
 
 import java.util.List;
 
-public interface IProductCategoryDao {
+public interface IProductCategoryDao extends IBaseDao{
     int deleteByPrimaryKey(Integer categoryId);
 
-    void insert(ProductCategory record);
+    int insert(ProductCategory record);
 
     int insertSelective(ProductCategory record);
 

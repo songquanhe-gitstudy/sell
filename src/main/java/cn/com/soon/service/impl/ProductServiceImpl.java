@@ -111,6 +111,8 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
-        return productInfoDao.insert(productInfo);
+        productInfoDao.insert(productInfo);
+
+        return productInfoDao.selectByPrimaryKey(productId);
     }
 }

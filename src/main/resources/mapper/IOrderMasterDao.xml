@@ -23,6 +23,12 @@
     from order_master
     where order_id = #{orderId,jdbcType=VARCHAR}
   </select>
+  <select id="findAllByBuyerOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_master
+    where buyer_openid = #{buyerOpenid,jdbcType=VARCHAR}
+  </select>
   <select id="findAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

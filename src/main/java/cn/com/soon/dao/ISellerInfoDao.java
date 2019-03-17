@@ -2,7 +2,7 @@ package cn.com.soon.dao;
 
 import cn.com.soon.model.SellerInfo;
 
-public interface ISellerInfoDao {
+public interface ISellerInfoDao extends IBaseDao{
     int deleteByPrimaryKey(String sellerId);
 
     int insert(SellerInfo record);

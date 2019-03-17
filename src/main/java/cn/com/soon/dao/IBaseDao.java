@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface IBaseDao<T> {
 
-    T save(T t);
+    T insert(T t);
     int update(T t);
     int delete(String id);
     T findById(String id);

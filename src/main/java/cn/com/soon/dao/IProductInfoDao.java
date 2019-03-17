@@ -4,10 +4,10 @@ import cn.com.soon.model.ProductInfo;
 
 import java.util.List;
 
-public interface IProductInfoDao {
+public interface IProductInfoDao extends IBaseDao{
     int deleteByPrimaryKey(String productId);
 
-    ProductInfo insert(ProductInfo record);
+    int insert(ProductInfo record);
 
     int insertSelective(ProductInfo record);
 

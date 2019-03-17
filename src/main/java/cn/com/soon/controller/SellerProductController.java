@@ -68,11 +68,11 @@ public class SellerProductController {
             productService.onSale(productId);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", "/seller/product/list");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/seller/product/list");
         return new ModelAndView("common/success", map);
     }
     /**
@@ -88,11 +88,11 @@ public class SellerProductController {
             productService.offSale(productId);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/list");
+            map.put("url", "/seller/product/list");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/seller/product/list");
         return new ModelAndView("common/success", map);
     }
 
@@ -124,7 +124,7 @@ public class SellerProductController {
                              Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/product/index");
+            map.put("url", "/seller/product/index");
             return new ModelAndView("common/error", map);
         }
 
@@ -140,11 +140,11 @@ public class SellerProductController {
             productService.save(productInfo);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/product/index");
+            map.put("url", "/seller/product/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/seller/product/list");
         return new ModelAndView("common/success", map);
     }
 }

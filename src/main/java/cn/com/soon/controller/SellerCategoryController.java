@@ -70,7 +70,7 @@ public class SellerCategoryController {
                              Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/seller/category/index");
             return new ModelAndView("common/error", map);
         }
 
@@ -83,11 +83,11 @@ public class SellerCategoryController {
             categoryService.save(productCategory);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/seller/category/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/category/list");
+        map.put("url", "/seller/category/list");
         return new ModelAndView("common/success", map);
     }
 }

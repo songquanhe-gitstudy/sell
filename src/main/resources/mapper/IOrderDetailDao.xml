@@ -22,11 +22,17 @@
     from order_detail
     where detail_id = #{detailId,jdbcType=VARCHAR}
   </select>
+  <select id="findAllByOrderId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_detail
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from order_detail
     where detail_id = #{detailId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.com.soon.model.OrderDetail">
+  <insert id="insert" parameterType="cn.com.soon.model.OrderDetail" >
     insert into order_detail (detail_id, order_id, product_id, 
       product_name, product_price, product_quantity, 
       product_icon, create_time, update_time

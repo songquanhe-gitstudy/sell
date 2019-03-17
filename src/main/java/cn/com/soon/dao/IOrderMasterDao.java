@@ -4,7 +4,7 @@ import cn.com.soon.model.OrderMaster;
 
 import java.util.List;
 
-public interface IOrderMasterDao {
+public interface IOrderMasterDao extends IBaseDao{
     int deleteByPrimaryKey(String orderId);
 
     int insert(OrderMaster record);

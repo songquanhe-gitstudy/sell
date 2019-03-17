@@ -17,8 +17,6 @@ public interface IOrderDetailDao {
 
     int updateByPrimaryKey(OrderDetail record);
 
-    List<OrderDetail>  findAllByOrderId(String orderId);
+    List<OrderDetail> findAllByOrderId(String orderId);
 
-
-    List<OrderDetail>  findByOrderId(String str);
 }

@@ -1,4 +1,4 @@
-package cn.com.soon.repository;
+package cn.com.soon.Dao;
 
 import cn.com.soon.dao.ISellerInfoDao;
 import cn.com.soon.model.SellerInfo;
@@ -22,9 +22,9 @@ public class SellerInfoDaoTest {
     public void save() {
         SellerInfo sellerInfo = new SellerInfo();
         sellerInfo.setSellerId(KeyUtil.genUniqueKey());
-        sellerInfo.setUsername("admin");
-        sellerInfo.setPassword("admin");
-        sellerInfo.setOpenid("abc");
+        sellerInfo.setUsername("yugege");
+        sellerInfo.setPassword("123456");
+        sellerInfo.setOpenid("23455");
         sellerInfoDao.insert(sellerInfo);
 //        Assert.assertNotNull(result);
     }
@@ -33,6 +33,7 @@ public class SellerInfoDaoTest {
     public void findByOpenid() throws Exception {
         SellerInfo result = sellerInfoDao.findSellerInfoByOpenid("abc");
 
+        System.out.println(result.toString());
         Assert.assertEquals("abc", result.getOpenid());
     }
 

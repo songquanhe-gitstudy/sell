@@ -1,4 +1,4 @@
-package cn.com.soon.repository;
+package cn.com.soon.Dao;
 
 import cn.com.soon.dao.IProductCategoryDao;
 import cn.com.soon.model.ProductCategory;
@@ -29,10 +29,10 @@ public class ProductCategoryDaoTest {
     }
 
     @Test
-    @Transactional
+//    @Transactional
     public void saveTest() {
-        ProductCategory productCategory = new ProductCategory("男生最爱", 4);
-        productCategoryDao.insert(productCategory);
+        ProductCategory productCategory = new ProductCategory("宋哥哥最爱", 9);
+        productCategoryDao.insertSelective(productCategory);
 
 //        Assert.assertNotNull(result);
 //        Assert.assertNotEquals(null, result);
@@ -42,9 +42,8 @@ public class ProductCategoryDaoTest {
     public void findByCategoryTypeInTest() {
         List<Integer> list = Arrays.asList(2,3,4);
 
-
-
         List<ProductCategory> result = productCategoryDao.findByCategoryTypeIn(list);
+        System.out.println("list：" + result.size());
         Assert.assertNotEquals(0, result.size());
     }
 

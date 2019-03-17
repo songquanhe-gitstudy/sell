@@ -1,4 +1,4 @@
-package cn.com.soon.repository;
+package cn.com.soon.Dao;
 
 import cn.com.soon.dao.IOrderMasterDao;
 import cn.com.soon.model.OrderMaster;
@@ -27,12 +27,12 @@ public class OrderMasterDaoTest {
     @Test
     public void saveTest() {
         OrderMaster orderMaster = new OrderMaster();
-        orderMaster.setOrderId("1234567");
-        orderMaster.setBuyerName("师兄");
-        orderMaster.setBuyerPhone("123456789123");
-        orderMaster.setBuyerAddress("幕课网");
+        orderMaster.setOrderId("1234561");
+        orderMaster.setBuyerName("宋哥哥7");
+        orderMaster.setBuyerPhone("123456789127");
+        orderMaster.setBuyerAddress("水手网7");
         orderMaster.setBuyerOpenid(OPENID);
-        orderMaster.setOrderAmount(new BigDecimal(2.5));
+        orderMaster.setOrderAmount(new BigDecimal(7.2));
 
         int insert = orderMasterDao.insert(orderMaster);
         Assert.assertNotNull(insert);
@@ -49,7 +49,7 @@ public class OrderMasterDaoTest {
         PageHelper.startPage(pageNum, pageSize);
         List<OrderMaster> result = orderMasterDao.findAllByBuyerOpenid(OPENID);
 //        Page<OrderMaster> result = repository.findByBuyerOpenid(OPENID, request);
-
+        System.out.println("result：" + result.size());
 //        Assert.assertNotEquals(0, result.getTotalElements());
     }
 
@@ -57,7 +57,7 @@ public class OrderMasterDaoTest {
     public void findAll() {
         List<OrderMaster> all = orderMasterDao.findAll();
 
-        System.out.println("result：" + all.toArray());
+        System.out.println("result：" + all.size());
     }
 
 }

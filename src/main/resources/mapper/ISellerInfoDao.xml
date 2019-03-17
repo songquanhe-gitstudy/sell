@@ -18,6 +18,12 @@
     from seller_info
     where seller_id = #{sellerId,jdbcType=VARCHAR}
   </select>
+  <select id="findSellerInfoByOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from seller_info
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from seller_info
     where seller_id = #{sellerId,jdbcType=VARCHAR}
