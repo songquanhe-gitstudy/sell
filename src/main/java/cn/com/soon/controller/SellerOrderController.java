@@ -4,6 +4,8 @@ import cn.com.soon.dto.OrderDTO;
 import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.service.OrderService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,12 +38,10 @@ public class SellerOrderController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10") Integer size,
                              Map<String, Object> map) {
-//        PageRequest request = new PageRequest(page - 1, size);
         List<OrderDTO> orderDTOPage = orderService.findList(page, size);
         map.put("orderDTOPage", orderDTOPage);
         map.put("currentPage", page);
         map.put("size", size);
-//        orderDTOPage.getTotalPages()
         return new ModelAndView("order/list", map);
     }
 

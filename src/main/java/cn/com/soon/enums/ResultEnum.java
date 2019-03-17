@@ -1,6 +1,5 @@
 package cn.com.soon.enums;
 
-import lombok.Data;
 import lombok.Getter;
 
 /**

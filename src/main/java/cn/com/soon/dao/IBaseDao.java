@@ -1,17 +1,16 @@
 package cn.com.soon.dao;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
+import java.util.List;
 
 /**
  * @author song.qh
  * @date 2019/3/17
  */
-public class IBaseDao<T> extends SqlSessionDaoSupport {
+public interface IBaseDao<T> {
 
-
-//    T save(T t);
-//    int update(T t);
-//    int delete(String id);
-//    T findById(String id);
-//    List<T> findAll();
+    T save(T t);
+    int update(T t);
+    int delete(String id);
+    T findById(String id);
+    List<T> findAll();
 }

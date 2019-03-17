@@ -1,5 +1,3 @@
-server.port: 8088
-
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -37,10 +35,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.com.soon.model
 
-#projectUrl:
-#  wechatMpAuthorize: http://sell.natapp4.cc
-#  wechatOpenAuthorize: http://sell.natapp4.cc
-#  sell: http://sell.natapp4.cc
+  #projectUrl:
+  #  wechatMpAuthorize: http://sell.natapp4.cc
+  #  wechatOpenAuthorize: http://sell.natapp4.cc
+  #  sell: http://sell.natapp4.cc
 
 
   #pagehelper分页插件配置

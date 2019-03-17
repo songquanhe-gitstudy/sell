@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
 
-                        <#list orderDTOPage.content as orderDTO>
+                        <#list orderDTOPage as orderDTO>
                         <tr>
                             <td>${orderDTO.orderId}</td>
                             <td>${orderDTO.buyerName}</td>
@@ -37,7 +37,7 @@
                             <td>${orderDTO.orderAmount}</td>
                             <td>${orderDTO.getOrderStatusEnum().message}</td>
                             <td>${orderDTO.getPayStatusEnum().message}</td>
-                            <td>${orderDTO.createTime}</td>
+                            <#--<td>${orderDTO.createTime}</td>-->
                             <td><a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                             <td>
                                 <#if orderDTO.getOrderStatusEnum().message == "新订单">
@@ -59,7 +59,7 @@
                         <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                     </#if>
 
-                    <#list 1..orderDTOPage.getTotalPages() as index>
+                    <#--<#list orderDTOPage.getTotalPages() as index>
                         <#if currentPage == index>
                             <li class="disabled"><a href="#">${index}</a></li>
                         <#else>
@@ -71,7 +71,7 @@
                         <li class="disabled"><a href="#">下一页</a></li>
                     <#else>
                         <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
-                    </#if>
+                    </#if>-->
                     </ul>
                 </div>
             </div>
@@ -108,7 +108,7 @@
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script>
+<#--<script>
     var websocket = null;
     if('WebSocket' in window) {
         websocket = new WebSocket('ws://sell.natapp4.cc/sell/webSocket');
@@ -140,7 +140,7 @@
         websocket.close();
     }
 
-</script>
+</script>-->
 
 </body>
 </html>

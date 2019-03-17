@@ -47,10 +47,17 @@ public class OrderMasterDaoTest {
         pageSize = pageSize == null ? 10 : pageSize;
 
         PageHelper.startPage(pageNum, pageSize);
-        List<OrderMaster> result =  orderMasterDao.findAllByBuyerOpenid(OPENID);
+        List<OrderMaster> result = orderMasterDao.findAllByBuyerOpenid(OPENID);
 //        Page<OrderMaster> result = repository.findByBuyerOpenid(OPENID, request);
 
 //        Assert.assertNotEquals(0, result.getTotalElements());
+    }
+
+    @Test
+    public void findAll() {
+        List<OrderMaster> all = orderMasterDao.findAll();
+
+        System.out.println("result：" + all.toArray());
     }
 
 }
