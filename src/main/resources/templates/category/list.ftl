@@ -30,8 +30,8 @@
                             <td>${category.categoryId}</td>
                             <td>${category.categoryName}</td>
                             <td>${category.categoryType}</td>
-                            <td>${category.createTime}</td>
-                            <td>${category.updateTime}</td>
+                            <td>${category.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                            <td>${category.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
                             <td><a href="/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
                         </tr>
                         </#list>

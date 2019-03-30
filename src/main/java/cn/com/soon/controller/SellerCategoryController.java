@@ -80,7 +80,13 @@ public class SellerCategoryController {
                 productCategory = categoryService.findOne(form.getCategoryId());
             }
             BeanUtils.copyProperties(form, productCategory);
-            categoryService.save(productCategory);
+            if (form.getCategoryId() != null) {
+                categoryService.updateByKey(productCategory);
+            }else {
+                //TODO 判断名字、类型不能一样
+
+                categoryService.save(productCategory);
+            }
         } catch (SellException e) {
             map.put("msg", e.getMessage());
             map.put("url", "/seller/category/index");

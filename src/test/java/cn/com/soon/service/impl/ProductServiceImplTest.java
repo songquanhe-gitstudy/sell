@@ -36,7 +36,7 @@ public class ProductServiceImplTest {
     @Test
     public void findAll() throws Exception {
 //        PageHelper.startPage(0,2);
-        List<ProductInfo> productInfoPage = productService.findAll(0,2);
+//        List<ProductInfo> productInfoPage = productService.findAll(0,2);
 //        System.out.println(productInfoPage.getTotalElements());
 //        Assert.assertNotEquals(0, productInfoPage.getTotalElements());
     }

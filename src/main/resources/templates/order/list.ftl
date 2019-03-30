@@ -4,10 +4,10 @@
 <body>
 <div id="wrapper" class="toggled">
 
-    <#--边栏sidebar-->
+<#--边栏sidebar-->
     <#include "../common/nav.ftl">
 
-    <#--主要内容content-->
+<#--主要内容content-->
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row clearfix">
@@ -94,7 +94,9 @@
                 你有新的订单
             </div>
             <div class="modal-footer">
-                <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button onclick="javascript:document.getElementById('notice').pause()" type="button"
+                        class="btn btn-default" data-dismiss="modal">关闭
+                </button>
                 <button onclick="location.reload()" type="button" class="btn btn-primary">查看新的订单</button>
             </div>
         </div>
@@ -103,7 +105,7 @@
 
 <#--播放音乐-->
 <audio id="notice" loop="loop">
-    <source src="/mp3/song.mp3" type="audio/mpeg" />
+    <source src="/mp3/song.mp3" type="audio/mpeg"/>
 </audio>
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>

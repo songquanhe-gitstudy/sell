@@ -2,6 +2,7 @@ package cn.com.soon.service;
 
 import cn.com.soon.dto.CartDTO;
 import cn.com.soon.model.ProductInfo;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -18,9 +19,11 @@ public interface ProductService {
      */
     List<ProductInfo> findUpAll();
 
-    List<ProductInfo> findAll(Integer page, Integer size);
+    PageInfo<ProductInfo> findAll(Integer page, Integer size);
 
     void save(ProductInfo productInfo);
+
+    void updateByKey(ProductInfo productInfo);
 
     //加库存
     void increaseStock(List<CartDTO> cartDTOList);

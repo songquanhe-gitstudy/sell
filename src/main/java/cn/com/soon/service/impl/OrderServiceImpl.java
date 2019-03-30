@@ -149,9 +149,9 @@ public class OrderServiceImpl implements OrderService {
         //修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        int updateResult = orderMasterDao.insert(orderMaster);
+        int updateResult = orderMasterDao.updateByPrimaryKey(orderMaster);
 //        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
-        if (updateResult != 0) {
+        if (updateResult == 0) {
             log.error("【取消订单】更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
@@ -187,8 +187,8 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        int updateResult = orderMasterDao.insert(orderMaster);
-        if (updateResult != 0) {
+        int updateResult = orderMasterDao.updateByPrimaryKey(orderMaster);
+        if (updateResult == 0) {
             log.error("【完结订单】更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }

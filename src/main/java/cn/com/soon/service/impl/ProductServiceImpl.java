@@ -8,6 +8,7 @@ import cn.com.soon.exception.SellException;
 import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.ProductService;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -36,16 +37,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductInfo> findAll(Integer page, Integer size) {
+    public PageInfo<ProductInfo> findAll(Integer page, Integer size) {
         page = page == null ? 1 : page;
         size = size == null ? 10 : size;
         PageHelper.startPage(page, size);
-        return productInfoDao.findAll();
+        List<ProductInfo> productInfoDaoList = productInfoDao.findAll();
+        PageInfo<ProductInfo> pageInfo = new PageInfo<>(productInfoDaoList);
+        return pageInfo;
     }
 
     @Override
     public void save(ProductInfo productInfo) {
         productInfoDao.insert(productInfo);
+    }
+
+    @Override
+    public void updateByKey(ProductInfo productInfo) {
+        productInfoDao.updateByPrimaryKey(productInfo);
     }
 
     @Override
@@ -59,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
             Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
             productInfo.setProductStock(result);
 
-            productInfoDao.insert(productInfo);
+            productInfoDao.updateByPrimaryKey(productInfo);
         }
 
     }
@@ -96,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
-        productInfoDao.insert(productInfo);
+        productInfoDao.updateByPrimaryKey(productInfo);
     }
 
     @Override
@@ -111,7 +119,7 @@ public class ProductServiceImpl implements ProductService {
 
         //更新
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
-        productInfoDao.insert(productInfo);
+        productInfoDao.updateByPrimaryKey(productInfo);
 
         return productInfoDao.selectByPrimaryKey(productId);
     }

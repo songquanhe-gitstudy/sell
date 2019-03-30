@@ -38,4 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void save(ProductCategory productCategory) {
         productCategoryDao.insert(productCategory);
     }
+
+    @Override
+    public void updateByKey(ProductCategory productCategory) {
+        productCategoryDao.updateByPrimaryKey(productCategory);
+    }
 }

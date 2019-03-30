@@ -16,4 +16,6 @@ public interface CategoryService {
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 
     void save(ProductCategory productCategory);
+
+    void updateByKey(ProductCategory productCategory);
 }

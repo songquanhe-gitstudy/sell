@@ -80,7 +80,7 @@ public class SellerOrderController {
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO;
         try {
             orderDTO = orderService.findOne(orderId);
         }catch (SellException e) {
