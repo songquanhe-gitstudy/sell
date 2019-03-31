@@ -1,4 +1,7 @@
-server.port: 8088
+server:
+  port: 8080
+  servlet:
+    context-path: /sell
 
 spring:
   datasource:
@@ -11,8 +14,6 @@ spring:
 #  redis:
 #    host: 192.168.30.113
 #    port: 6379
-server:
-  context-path: /sell
 #logging:
 #  pattern:
 #    console: "%d - %msg%n"
@@ -22,14 +23,14 @@ server:
 #    com.imooc.LoggerTest: debug
 
 wechat:
-  mpAppId: wxd898fcb01713c658
-  mpAppSecret: 47ccc303338cee6e62894fxxxxxxxxxxx
+  mpAppId: wxc3a72fffe7db3d44
+  mpAppSecret: c068b992d5c5cd09a32e012f09396510
   openAppId: wx6ad144e54af67d87
   openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
   mchId: 1483469312
   mchKey: 06C56A89949D617xxxxxxxxxxx
   keyPath: /var/weixin_cert/h5.p12
-  notifyUrl: http://sell.natapp4.cc/sell/pay/notify
+  notifyUrl: http://wc.chainof.cn/sell/pay/notify
   templateId:
     orderStatus: e-Cqq67QxD6YNI41iRiqawEYdFavW_7pc7LyEMb-yeQ
 
@@ -37,13 +38,13 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.com.soon.model
 
-#projectUrl:
-#  wechatMpAuthorize: http://sell.natapp4.cc
-#  wechatOpenAuthorize: http://sell.natapp4.cc
-#  sell: http://sell.natapp4.cc
+project-url:
+  wechatMpAuthorize: http://wc.chainof.cn
+  wechatOpenAuthorize: http://wc.chainof.cn
+  sell: http://wc.chainof.cn
 
 
-  #pagehelper分页插件配置
+#pagehelper分页插件配置
 #  pagehelper.helperDialect=mysql
 #  pagehelper.reasonable=true
 #  pagehelper.supportMethodsArguments=true

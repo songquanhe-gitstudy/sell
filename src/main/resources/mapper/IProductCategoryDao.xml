@@ -22,7 +22,7 @@
     <include refid="Base_Column_List" />
     from product_category
   </select>
-  <select id="findByCategoryTypeIn" resultType="map">
+  <select id="findByCategoryTypeIn" resultMap="BaseResultMap">
     select * from product_category where category_type in
     <foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">#{item}</foreach>
   </select>
