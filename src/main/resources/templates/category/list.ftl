@@ -32,7 +32,7 @@
                             <td>${category.categoryType}</td>
                             <td>${category.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
                             <td>${category.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-                            <td><a href="/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
+                            <td><a href="/sell/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
                         </tr>
                         </#list>
                         </tbody>

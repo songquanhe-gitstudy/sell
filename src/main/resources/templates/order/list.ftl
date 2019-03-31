@@ -38,10 +38,10 @@
                             <td>${orderDTO.getOrderStatusEnum().message}</td>
                             <td>${orderDTO.getPayStatusEnum().message}</td>
                             <td>${orderDTO.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-                            <td><a href="/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
+                            <td><a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                             <td>
                                 <#if orderDTO.getOrderStatusEnum().message == "新订单">
-                                    <a href="/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
+                                    <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
                                 </#if>
                             </td>
                         </tr>
@@ -56,21 +56,21 @@
                     <#if currentPage lte 1>
                         <li class="disabled"><a href="#">第一页</a></li>
                     <#else>
-                        <li><a href="/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
+                        <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                     </#if>
 
                     <#list pageNavigate as index>
                         <#if currentPage == index>
                             <li class="disabled"><a href="#">${index}</a></li>
                         <#else>
-                            <li><a href="/seller/order/list?page=${index}&size=${size}">${index}</a></li>
+                            <li><a href="/sell/seller/order/list?page=${index}&size=${size}">${index}</a></li>
                         </#if>
                     </#list>
 
                     <#if currentPage gte pages>
                         <li class="disabled"><a href="#">下一页</a></li>
                     <#else>
-                        <li><a href="/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
+                        <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
                     </#if>
                     </ul>
                 </div>
@@ -110,10 +110,10 @@
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<#--<script>
+<script>
     var websocket = null;
     if('WebSocket' in window) {
-        websocket = new WebSocket('ws://sell.natapp4.cc/sell/webSocket');
+        websocket = new WebSocket('ws://wc.chainof.cn/sell/webSocket');
     }else {
         alert('该浏览器不支持websocket!');
     }
@@ -142,7 +142,7 @@
         websocket.close();
     }
 
-</script>-->
+</script>
 
 </body>
 </html>
