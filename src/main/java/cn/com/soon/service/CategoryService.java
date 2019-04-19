@@ -1,13 +1,11 @@
 package cn.com.soon.service;
 
-import cn.com.soon.VO.ProductCategory;
+import cn.com.soon.model.ProductCategory;
 
 import java.util.List;
 
 /**
  * 类目
- * Created by 廖师兄
- * 2017-05-09 10:12
  */
 public interface CategoryService {
 
@@ -17,5 +15,7 @@ public interface CategoryService {
 
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 
-    ProductCategory save(ProductCategory productCategory);
+    void save(ProductCategory productCategory);
+
+    void updateByKey(ProductCategory productCategory);
 }

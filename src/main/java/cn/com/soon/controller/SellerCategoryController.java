@@ -1,8 +1,8 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.VO.ProductCategory;
 import cn.com.soon.exception.SellException;
 import cn.com.soon.form.CategoryForm;
+import cn.com.soon.model.ProductCategory;
 import cn.com.soon.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ import java.util.Map;
 
 /**
  * 卖家类目
- * Created by 廖师兄
- * 2017-07-23 21:06
  */
 @Controller
 @RequestMapping("/seller/category")
@@ -72,7 +70,7 @@ public class SellerCategoryController {
                              Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/seller/category/index");
             return new ModelAndView("common/error", map);
         }
 
@@ -82,14 +80,20 @@ public class SellerCategoryController {
                 productCategory = categoryService.findOne(form.getCategoryId());
             }
             BeanUtils.copyProperties(form, productCategory);
-            categoryService.save(productCategory);
+            if (form.getCategoryId() != null) {
+                categoryService.updateByKey(productCategory);
+            }else {
+                //TODO 判断名字、类型不能一样
+
+                categoryService.save(productCategory);
+            }
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/seller/category/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/category/list");
+        map.put("url", "/seller/category/list");
         return new ModelAndView("common/success", map);
     }
 }

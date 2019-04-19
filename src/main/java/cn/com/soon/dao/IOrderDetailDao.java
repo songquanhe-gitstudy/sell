@@ -2,6 +2,8 @@ package cn.com.soon.dao;
 
 import cn.com.soon.model.OrderDetail;
 
+import java.util.List;
+
 public interface IOrderDetailDao {
     int deleteByPrimaryKey(String detailId);
 
@@ -14,4 +16,7 @@ public interface IOrderDetailDao {
     int updateByPrimaryKeySelective(OrderDetail record);
 
     int updateByPrimaryKey(OrderDetail record);
+
+    List<OrderDetail> findAllByOrderId(String orderId);
+
 }

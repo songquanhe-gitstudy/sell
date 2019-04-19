@@ -3,8 +3,6 @@ package cn.com.soon.utils;
 import cn.com.soon.enums.CodeEnum;
 
 /**
- * Created by 廖师兄
- * 2017-07-16 18:36
  */
 public class EnumUtil {
 

@@ -4,10 +4,10 @@
 <body>
 <div id="wrapper" class="toggled">
 
-    <#--边栏sidebar-->
+<#--边栏sidebar-->
     <#include "../common/nav.ftl">
 
-    <#--主要内容content-->
+<#--主要内容content-->
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row clearfix">
@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
 
-                        <#list orderDTOPage.content as orderDTO>
+                        <#list orderDTOPage as orderDTO>
                         <tr>
                             <td>${orderDTO.orderId}</td>
                             <td>${orderDTO.buyerName}</td>
@@ -37,7 +37,7 @@
                             <td>${orderDTO.orderAmount}</td>
                             <td>${orderDTO.getOrderStatusEnum().message}</td>
                             <td>${orderDTO.getPayStatusEnum().message}</td>
-                            <td>${orderDTO.createTime}</td>
+                            <td>${orderDTO.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
                             <td><a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                             <td>
                                 <#if orderDTO.getOrderStatusEnum().message == "新订单">
@@ -54,12 +54,12 @@
                 <div class="col-md-12 column">
                     <ul class="pagination pull-right">
                     <#if currentPage lte 1>
-                        <li class="disabled"><a href="#">上一页</a></li>
+                        <li class="disabled"><a href="#">第一页</a></li>
                     <#else>
                         <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                     </#if>
 
-                    <#list 1..orderDTOPage.getTotalPages() as index>
+                    <#list pageNavigate as index>
                         <#if currentPage == index>
                             <li class="disabled"><a href="#">${index}</a></li>
                         <#else>
@@ -67,7 +67,7 @@
                         </#if>
                     </#list>
 
-                    <#if currentPage gte orderDTOPage.getTotalPages()>
+                    <#if currentPage gte pages>
                         <li class="disabled"><a href="#">下一页</a></li>
                     <#else>
                         <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
@@ -94,7 +94,9 @@
                 你有新的订单
             </div>
             <div class="modal-footer">
-                <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button onclick="javascript:document.getElementById('notice').pause()" type="button"
+                        class="btn btn-default" data-dismiss="modal">关闭
+                </button>
                 <button onclick="location.reload()" type="button" class="btn btn-primary">查看新的订单</button>
             </div>
         </div>
@@ -103,7 +105,7 @@
 
 <#--播放音乐-->
 <audio id="notice" loop="loop">
-    <source src="/sell/mp3/song.mp3" type="audio/mpeg" />
+    <source src="/mp3/song.mp3" type="audio/mpeg"/>
 </audio>
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -111,7 +113,7 @@
 <script>
     var websocket = null;
     if('WebSocket' in window) {
-        websocket = new WebSocket('ws://sell.natapp4.cc/sell/webSocket');
+        websocket = new WebSocket('ws://wc.chainof.cn/sell/webSocket');
     }else {
         alert('该浏览器不支持websocket!');
     }

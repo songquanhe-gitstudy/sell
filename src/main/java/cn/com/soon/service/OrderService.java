@@ -1,12 +1,11 @@
 package cn.com.soon.service;
 
 import cn.com.soon.dto.OrderDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 18:23
  */
 public interface OrderService {
 
@@ -17,7 +16,7 @@ public interface OrderService {
     OrderDTO findOne(String orderId);
 
     /** 查询订单列表. */
-    Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
+    List<OrderDTO> findList(String buyerOpenid);
 
     /** 取消订单. */
     OrderDTO cancel(OrderDTO orderDTO);
@@ -29,6 +28,6 @@ public interface OrderService {
     OrderDTO paid(OrderDTO orderDTO);
 
     /** 查询订单列表. */
-    Page<OrderDTO> findList(Pageable pageable);
+    PageInfo<OrderDTO> findList(Integer page, Integer size);
 
 }

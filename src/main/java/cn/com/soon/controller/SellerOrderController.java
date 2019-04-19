@@ -1,25 +1,25 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.service.OrderService;
 import cn.com.soon.dto.OrderDTO;
 import cn.com.soon.enums.ResultEnum;
 import cn.com.soon.exception.SellException;
+import cn.com.soon.service.OrderService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * 卖家端订单
- * Created by 廖师兄
- * 2017-07-16 17:24
  */
 @Controller
 @RequestMapping("/seller/order")
@@ -37,14 +37,14 @@ public class SellerOrderController {
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                             @RequestParam(value = "size", defaultValue = "5") Integer size,
                              Map<String, Object> map) {
-        PageRequest request = new PageRequest(page - 1, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(request);
-        map.put("orderDTOPage", orderDTOPage);
+        PageInfo<OrderDTO> OrderDTOPageInfo = orderService.findList(page, size);
+        map.put("orderDTOPage", OrderDTOPageInfo.getList());
+        map.put("pageNavigate", OrderDTOPageInfo.getNavigatepageNums());
+        map.put("pages", OrderDTOPageInfo.getPages());
         map.put("currentPage", page);
         map.put("size", size);
-//        orderDTOPage.getTotalPages()
         return new ModelAndView("order/list", map);
     }
 
@@ -62,12 +62,12 @@ public class SellerOrderController {
         } catch (SellException e) {
             log.error("【卖家端取消订单】发生异常{}", e);
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/order/list");
+            map.put("url", "/seller/order/list");
             return new ModelAndView("common/error", map);
         }
 
         map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/order/list");
+        map.put("url", "/seller/order/list");
         return new ModelAndView("common/success");
     }
 
@@ -80,13 +80,13 @@ public class SellerOrderController {
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO;
         try {
             orderDTO = orderService.findOne(orderId);
         }catch (SellException e) {
             log.error("【卖家端查询订单详情】发生异常{}", e);
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/order/list");
+            map.put("url", "/seller/order/list");
             return new ModelAndView("common/error", map);
         }
 
@@ -109,12 +109,12 @@ public class SellerOrderController {
         } catch (SellException e) {
             log.error("【卖家端完结订单】发生异常{}", e);
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/order/list");
+            map.put("url", "/seller/order/list");
             return new ModelAndView("common/error", map);
         }
 
         map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/order/list");
+        map.put("url", "/seller/order/list");
         return new ModelAndView("common/success");
     }
 }

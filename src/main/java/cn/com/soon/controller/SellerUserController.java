@@ -1,15 +1,13 @@
 /*
-package com.imooc.controller;
+package cn.com.soon.controller;
 
-import com.imooc.config.ProjectUrlConfig;
-import com.imooc.constant.CookieConstant;
-import com.imooc.constant.RedisConstant;
-import com.imooc.dataobject.SellerInfo;
-import com.imooc.enums.ResultEnum;
-import com.imooc.service.SellerService;
-import com.imooc.utils.CookieUtil;
+import cn.com.soon.constant.CookieConstant;
+import cn.com.soon.constant.RedisConstant;
+import cn.com.soon.enums.ResultEnum;
+import cn.com.soon.model.SellerInfo;
+import cn.com.soon.service.SellerService;
+import cn.com.soon.utils.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +24,8 @@ import java.util.concurrent.TimeUnit;
 */
 /**
  * 卖家用户
- * Created by 廖师兄
- * 2017-07-30 15:28
  *//*
+
 
 @Controller
 @RequestMapping("/seller")

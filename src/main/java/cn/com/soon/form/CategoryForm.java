@@ -3,8 +3,6 @@ package cn.com.soon.form;
 import lombok.Data;
 
 /**
- * Created by 廖师兄
- * 2017-07-23 21:43
  */
 @Data
 public class CategoryForm {

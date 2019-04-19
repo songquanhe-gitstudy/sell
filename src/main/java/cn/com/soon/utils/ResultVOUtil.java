@@ -3,8 +3,6 @@ package cn.com.soon.utils;
 import cn.com.soon.VO.ResultVO;
 
 /**
- * Created by 廖师兄
- * 2017-05-15 00:22
  */
 public class ResultVOUtil {
 

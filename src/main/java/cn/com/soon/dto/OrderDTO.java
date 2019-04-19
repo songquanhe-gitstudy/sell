@@ -1,6 +1,6 @@
 package cn.com.soon.dto;
 
-import cn.com.soon.VO.OrderDetail;
+import cn.com.soon.model.OrderDetail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cn.com.soon.enums.OrderStatusEnum;
@@ -14,12 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 18:30
  */
 @Data
-//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /** 订单id. */

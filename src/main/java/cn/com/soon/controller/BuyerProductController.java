@@ -1,10 +1,10 @@
 package cn.com.soon.controller;
 
-import cn.com.soon.VO.ProductInfo;
 import cn.com.soon.VO.ProductInfoVO;
 import cn.com.soon.VO.ProductVO;
 import cn.com.soon.VO.ResultVO;
-import cn.com.soon.VO.ProductCategory;
+import cn.com.soon.model.ProductCategory;
+import cn.com.soon.model.ProductInfo;
 import cn.com.soon.service.CategoryService;
 import cn.com.soon.service.ProductService;
 import cn.com.soon.utils.ResultVOUtil;
@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 
 /**
  * 买家商品
- * Created by 廖师兄
- * 2017-05-12 14:08
  */
 @RestController
 @RequestMapping("/buyer/product")

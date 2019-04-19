@@ -1,27 +1,14 @@
-package cn.com.soon.VO;
+package cn.com.soon.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import cn.com.soon.enums.ProductStatusEnum;
 import cn.com.soon.utils.EnumUtil;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * 商品
- * Created by 廖师兄
- * 2017-05-09 11:30
- */
-@Entity
 @Data
-@DynamicUpdate
 public class ProductInfo {
-
-    @Id
     private String productId;
 
     /** 名字. */
@@ -44,12 +31,10 @@ public class ProductInfo {
 
     /** 类目编号. */
     private Integer categoryType;
-
     private Date createTime;
 
     private Date updateTime;
 
-    @JsonIgnore
     public ProductStatusEnum getProductStatusEnum() {
         return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
     }

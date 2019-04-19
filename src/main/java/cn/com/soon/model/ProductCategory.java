@@ -1,26 +1,11 @@
-package cn.com.soon.VO;
+package cn.com.soon.model;
 
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
-/**
- * 类目
- * Created by 廖师兄
- * 2017-05-07 14:30
- */
-@Entity
-@DynamicUpdate
 @Data
 public class ProductCategory {
-
-    /** 类目id. */
-    @Id
-    @GeneratedValue
     private Integer categoryId;
 
     /** 类目名字. */

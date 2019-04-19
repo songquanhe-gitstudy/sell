@@ -1,15 +1,13 @@
 package cn.com.soon.converter;
 
-import cn.com.soon.VO.OrderMaster;
 import cn.com.soon.dto.OrderDTO;
+import cn.com.soon.model.OrderMaster;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by 廖师兄
- * 2017-06-11 22:02
  */
 public class OrderMaster2OrderDTOConverter {
 
